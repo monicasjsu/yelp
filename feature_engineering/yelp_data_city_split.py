@@ -11,7 +11,7 @@ df.head()
 print(df.columns)
 
 # Lets drop the columns which are of no use to us.
-cols_drop = ['level_0', 'index', 'address', 'business_id']
+cols_drop = ['address', 'business_id']
 df.drop(cols_drop, axis=1, inplace=True)
 list(df.isnull().sum())
 

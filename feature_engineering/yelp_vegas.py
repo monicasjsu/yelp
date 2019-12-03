@@ -155,7 +155,7 @@ for index, row in df.iterrows():
 # Fill the remaining NoiseLevel by using filling it using the most occurring element of the column
 df['NoiseLevel'].fillna(df['NoiseLevel'].mode()[0], inplace=True)
 
-# Fill HasTV by using filling it using the most occurring element of the column
+# Fill OutdoorSeating by using filling it using the most occurring element of the column
 df['OutdoorSeating'].fillna(df['OutdoorSeating'].mode()[0], inplace=True)
 
 # Fill RestaurantsReservations by using filling it using the most occurring element of the column
@@ -278,7 +278,7 @@ df['score'] = np.where(df['score'].between(score_mean + score_std, score_mean + 
 df['score'] = np.where(df['score'].between(score_mean + 2 * score_std, 100), 5, df['score'])
 df = df.astype({'score': 'int'})
 
-df.drop(['city', 'review_norm', 'stars_norm', ], axis=1, inplace=True)
+df.drop(['city', 'review_norm', 'stars_norm'], axis=1, inplace=True)
 
 # Now lets save the final data frame which has no missing values into databases.
 # This will be the final version of dataset, where we run the models.

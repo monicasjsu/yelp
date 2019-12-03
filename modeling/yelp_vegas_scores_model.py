@@ -22,7 +22,7 @@ from xgboost.sklearn import XGBClassifier
 db_conn = Engine.get_db_conn()
 df = pd.read_sql('yelp_vegas_final', con=db_conn)
 
-y = df['stars']
+y = df['score']
 X = df.drop(['score', 'stars', 'review_count'], axis=1)
 
 # Applied PCA with 10 components, even though it sped up the running time, it didn't improve the accuracies.
@@ -189,7 +189,6 @@ print('RMSE: {}'.format(rmse))
 print('Train Score: {}'.format(lasso_model_001_train_score))
 print('Test Score: {}'.format(lasso_model_001_test_score))
 
-
 # ******************* Lasso (0.001) ************************
 lasso_0001 = Lasso(alpha=0.001)
 lasso_0001.fit(X_train_final, y_train_final)
@@ -206,7 +205,6 @@ print('RMSE: {}'.format(rmse))
 print('Train Score: {}'.format(lasso_model_0001_train_score))
 print('Test Score: {}'.format(lasso_model_0001_test_score))
 
-
 # ******************* Random Forest ************************
 rfc = RandomForestClassifier()
 run_model(rfc, 'Random Forest')
@@ -219,6 +217,5 @@ run_model(gbc, 'Gradient Boost Classifier')
 xgb = XGBClassifier()
 run_model(xgb, 'XG Boost Classifier')
 
-# After analysis the evaluation metrics, we decided to export log_reg and xgboost classifier
-joblib.dump(log_reg, 'log_reg/model.joblib')
-joblib.dump(xgb, 'xgb/model.joblib')
+joblib.dump(log_reg, 'log_reg/score/model.joblib')
+joblib.dump(xgb, 'xgb/score/model.joblib')

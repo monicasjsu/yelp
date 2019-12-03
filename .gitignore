@@ -1,0 +1,14 @@
+
+env/*
+*.dat
+*.pyc
+pre_processing/derby.log
+pre_processing/metastore_db/db.lck
+pre_processing/metastore_db/dbex.lck
+pre_processing/metastore_db/log/log.ctrl
+pre_processing/metastore_db/log/logmirror.ctrl
+pre_processing/metastore_db/log/README_DO_NOT_TOUCH_FILES.txt
+pre_processing/metastore_db/README_DO_NOT_TOUCH_FILES.txt
+pre_processing/metastore_db/seg0/README_DO_NOT_TOUCH_FILES.txt
+visualizations/.ipynb_checkpoints/yelp_visualizations_vegas-checkpoint.ipynb
+pre_processing/metastore_db/service.properties
