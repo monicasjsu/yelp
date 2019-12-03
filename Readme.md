@@ -1,13 +1,13 @@
 # Restaurant Setup success prediction using Yelp Dataset
 
-In order to run this project, you need to the following prerequisites:
-pyenv to install 3.5.7. Google AI only supports python 3.5.7
+In order to run this project, you need to have the following prerequisites:
+* pyenv to install 3.5.7 (Google AI only supports python 3.5.7)
 
 `brew install pyenv`
 
 `pyenv install Python 3.5`
 
-Our code uses mysqlalchemy to save checkpoints into MySql DB (Amazon RDS)
+Our code uses `mysqlalchemy` to save checkpoints into MySql DB (Amazon RDS)
 So you need to have mysqlclient installed in your machine
 
 `brew install mysql`
