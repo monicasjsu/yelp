@@ -19,11 +19,14 @@ import matplotlib.pyplot as plt
 from inspect import signature
 from xgboost.sklearn import XGBClassifier
 
+import warnings
+warnings.filterwarnings("ignore")
+
 db_conn = Engine.get_db_conn()
 df = pd.read_sql('yelp_vegas_final', con=db_conn)
 
 y = df['stars']
-X = df.drop(['score', 'stars', 'review_count'], axis=1)
+X = df.drop(['score', 'stars'], axis=1)
 
 # Applied PCA with 10 components, even though it sped up the running time, it didn't improve the accuracies.
 # Also PCA negative values cannot be applied to Multinomial and Complement Naive Bayes
@@ -126,16 +129,16 @@ for k in knn_range:
     run_model(knn_model, ' KNN({} neighbors) '.format(k))
 
 # ******************* SVM(linear) ************************
-svm_model = svm.SVC(kernel='linear')
-run_model(svm_model, ' SVM(Linear) ')
-
-# ******************* SVM(poly) ************************
-svm_model = svm.SVC(kernel='poly')
-run_model(svm_model, ' SVM(poly) ')
-
-# ******************* SVM(rbf) ************************
-svm_model = svm.SVC(kernel='rbf')
-run_model(svm_model, ' SVM(rbf) ')
+# svm_model = svm.SVC(kernel='linear')
+# run_model(svm_model, ' SVM(Linear) ')
+#
+# # ******************* SVM(poly) ************************
+# svm_model = svm.SVC(kernel='poly')
+# run_model(svm_model, ' SVM(poly) ')
+#
+# # ******************* SVM(rbf) ************************
+# svm_model = svm.SVC(kernel='rbf')
+# run_model(svm_model, ' SVM(rbf) ')
 
 # ******************* Logistic Regression ************************
 log_reg = LogisticRegression()
@@ -219,6 +222,7 @@ run_model(gbc, 'Gradient Boost Classifier')
 xgb = XGBClassifier()
 run_model(xgb, 'XG Boost Classifier')
 
-# After analysis the evaluation metrics, we decided to export log_reg and xgboost classifier
-joblib.dump(log_reg, 'log_reg/model.joblib')
-joblib.dump(xgb, 'xgb/model.joblib')
+# After analysis the evaluation metrics, we decided to export log_reg, gradient boost and xgboost classifier
+joblib.dump(log_reg, 'log_reg_stars_model.joblib')
+joblib.dump(gbc, 'gbc_stars_model.joblib')
+joblib.dump(xgb, 'xgb_stars_model.joblib')

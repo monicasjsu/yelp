@@ -2,6 +2,8 @@ import pandas as pd
 import re
 
 from db.mysql import Engine
+import warnings
+warnings.filterwarnings("ignore")
 
 # df = pd.read_csv('yelp_cleaned.csv')
 db_conn = Engine.get_db_conn()

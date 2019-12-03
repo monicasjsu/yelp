@@ -53,8 +53,7 @@ del df_categories_sum
 
 df.reset_index(inplace=True)
 df = pd.concat([df, df_valid_categories], axis=1)
-df.drop('categories', axis=1, inplace=True)
-
+df.drop(['categories', 'index'], axis=1, inplace=True)
 df.to_sql('yelp_cleaned', con=db_conn, index=False)
 
 # Uncomment if you want to export the Data frame to local.

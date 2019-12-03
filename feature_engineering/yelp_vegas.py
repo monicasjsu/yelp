@@ -3,8 +3,9 @@ import pandas as pd
 from sklearn.preprocessing import MinMaxScaler
 import seaborn as sns
 import matplotlib.pyplot as plt
-
 from db.mysql import Engine
+import warnings
+warnings.filterwarnings("ignore")
 
 db_conn = Engine.get_db_conn()
 df = pd.read_sql('yelp_vegas', db_conn)
@@ -31,8 +32,10 @@ print(df['RestaurantsAttire'].value_counts())
 # As casual attire has most of the value counts as casual attire.
 # It can be removed.
 
+df['American'] = df['American (Traditional)'] + df['American (New)']
 columns_drop = ['latitude', 'longitude', 'name', 'postal_code',
-                'state', 'BikeParking', 'is_open', 'RestaurantsAttire']
+                'state', 'BikeParking', 'is_open', 'RestaurantsAttire',
+                'Food', 'Breakfast & Brunch', 'American (Traditional)', 'American (New)']
 df.drop(columns_drop, axis=1, inplace=True)
 
 # Lets replace All True/False to 1/0 s
@@ -283,3 +286,4 @@ df.drop(['city', 'review_norm', 'stars_norm'], axis=1, inplace=True)
 # Now lets save the final data frame which has no missing values into databases.
 # This will be the final version of dataset, where we run the models.
 df.to_sql('yelp_vegas_final', db_conn, index=False)
+df.to_csv('yelp_vegas_final.csv', index=False)

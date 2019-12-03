@@ -18,6 +18,8 @@ import graphviz
 import matplotlib.pyplot as plt
 from inspect import signature
 from xgboost.sklearn import XGBClassifier
+import warnings
+warnings.filterwarnings("ignore")
 
 db_conn = Engine.get_db_conn()
 df = pd.read_sql('yelp_vegas_final', con=db_conn)
@@ -125,17 +127,17 @@ for k in knn_range:
     knn_model = KNeighborsClassifier(n_neighbors=k)
     run_model(knn_model, ' KNN({} neighbors) '.format(k))
 
-# ******************* SVM(linear) ************************
-svm_model = svm.SVC(kernel='linear')
-run_model(svm_model, ' SVM(Linear) ')
-
-# ******************* SVM(poly) ************************
-svm_model = svm.SVC(kernel='poly')
-run_model(svm_model, ' SVM(poly) ')
-
-# ******************* SVM(rbf) ************************
-svm_model = svm.SVC(kernel='rbf')
-run_model(svm_model, ' SVM(rbf) ')
+# # ******************* SVM(linear) ************************
+# svm_model = svm.SVC(kernel='linear')
+# run_model(svm_model, ' SVM(Linear) ')
+#
+# # ******************* SVM(poly) ************************
+# svm_model = svm.SVC(kernel='poly')
+# run_model(svm_model, ' SVM(poly) ')
+#
+# # ******************* SVM(rbf) ************************
+# svm_model = svm.SVC(kernel='rbf')
+# run_model(svm_model, ' SVM(rbf) ')
 
 # ******************* Logistic Regression ************************
 log_reg = LogisticRegression()
@@ -217,5 +219,5 @@ run_model(gbc, 'Gradient Boost Classifier')
 xgb = XGBClassifier()
 run_model(xgb, 'XG Boost Classifier')
 
-joblib.dump(log_reg, 'log_reg/score/model.joblib')
-joblib.dump(xgb, 'xgb/score/model.joblib')
+joblib.dump(log_reg, 'log_reg_score_model.joblib')
+joblib.dump(xgb, 'xgb_score_model.joblib')
